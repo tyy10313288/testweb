@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>時刻チェック</h1>
+
+    <p>調べたい時間：（0-23）</p>
+    <input type="number" id="checkTime" min="0" max="23">    
+    <p>開始時間：（0-23）</p>
+    <input type="number" id="startTime" min="0" max="23">
+    <p>終了時間：（0-23）</p>
+    <input type="number" id="endTime" min="0" max="23">
+    <br><br>
+
+    <button onclick="Checking()">確認</button>
+    <br><br>
+    <p id="result"></p>
+
+    <script>
+        function Checking()
+        {
+            const checkTime=parseInt(document.getElementById('checkTime').value);
+            const startTime=parseInt(document.getElementById('startTime').value);
+            const endTime=parseInt(document.getElementById('endTime').value);
+
+            let resultText;
+            if (isNaN(checkTime) || checkTime < 0 || checkTime > 23 ||
+            isNaN(startTime) || startTime < 0 || startTime > 23 ||
+            isNaN(endTime) || endTime < 0 || endTime > 23) 
+            {
+            document.getElementById('result').textContent = "無効時間";
+            return;
+            }
+
+            if(startTime==endTime)
+        {
+            if(checkTime==startTime)
+            {
+                resultText="範囲内です";
+            }
+            else
+            {
+                resultText="範囲外です";
+
+            }
+        }           
+        
+        else if(startTime<endTime)
+        {
+            if(checkTime>=startTime && checkTime<=endTime)
+            {
+                resultText="範囲内です";
+            }
+            else
+            {
+                resultText="範囲外です";
+            }
+        }
+        else
+        {
+            if(checkTime>=startTime || checkTime<endTime)
+            {
+                resultText="範囲内です";
+            }
+            else
+            {
+                resultText="範囲外です";
+            }
+        }
+        document.getElementById('result').textContent=resultText;
+
+        }
+    </script>
+        
+    
+</body>
+</html>
